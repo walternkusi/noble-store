@@ -16,7 +16,10 @@ async function connect(): Promise<Db> {
   }
 
   if (!clientPromise) {
-    const client = new MongoClient(MONGODB_URI);
+    const client = new MongoClient(MONGODB_URI, {
+      retryWrites: true,
+      w: 'majority',
+    });
     clientPromise = client.connect();
   }
 
