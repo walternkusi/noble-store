@@ -128,7 +128,7 @@ export default function NewProductPage() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Add New Product</h2>
+        <h2 className="text-2xl font-bold text-black">Add New Product</h2>
         <p className="text-gray-500 mt-1">Fill in the details to add a new product</p>
       </div>
 
@@ -140,7 +140,7 @@ export default function NewProductPage() {
         )}
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Basic Information</h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -151,7 +151,7 @@ export default function NewProductPage() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
                 placeholder="Enter product name"
                 required
               />
@@ -166,7 +166,7 @@ export default function NewProductPage() {
                   name="category"
                   value={form.category}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
                   required
                 >
                   <option value="">Select category</option>
@@ -186,7 +186,7 @@ export default function NewProductPage() {
                   name="price"
                   value={form.price}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
                   placeholder="0"
                   min="0"
                   required
@@ -203,7 +203,7 @@ export default function NewProductPage() {
                 value={form.description}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none resize-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none resize-none text-black"
                 placeholder="Enter product description"
               />
             </div>
@@ -217,7 +217,7 @@ export default function NewProductPage() {
                 name="stock"
                 value={form.stock}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
                 placeholder="0"
                 min="0"
                 required
@@ -227,7 +227,7 @@ export default function NewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Images *</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Product Images *</h3>
           <div>
             <input
               type="file"
@@ -269,7 +269,7 @@ export default function NewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Available Sizes</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Available Sizes</h3>
           {form.category ? (
             <div className="flex flex-wrap gap-3">
               {availableSizesForCategory.map((size) => (
@@ -297,7 +297,7 @@ export default function NewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Available Colors</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Available Colors</h3>
           <div className="flex flex-wrap gap-3">
             {COLORS.map((color) => (
               <label
@@ -327,11 +327,11 @@ export default function NewProductPage() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Flags</h3>
+          <h3 className="text-lg font-semibold text-black mb-4">Product Flags</h3>
           <div className="space-y-4">
             <label className="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer">
               <div>
-                <p className="font-medium text-gray-900">Featured Product</p>
+                <p className="font-medium text-black">Featured Product</p>
                 <p className="text-sm text-gray-500">Show this product in featured section</p>
               </div>
               <div
@@ -350,7 +350,7 @@ export default function NewProductPage() {
 
             <label className="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer">
               <div>
-                <p className="font-medium text-gray-900">New Arrival</p>
+                <p className="font-medium text-black">New Arrival</p>
                 <p className="text-sm text-gray-500">Mark this product as new</p>
               </div>
               <div
