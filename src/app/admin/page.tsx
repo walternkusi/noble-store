@@ -5,9 +5,6 @@ import Link from 'next/link';
 
 interface Stats {
   totalProducts: number;
-  totalOrders: number;
-  pendingOrders: number;
-  completedOrders: number;
   totalSales: number;
   recentOrders: Array<{
     id: string;
@@ -81,9 +78,6 @@ export default function AdminDashboard() {
 
   const statCards = [
     { name: 'Total Products', value: stats.totalProducts, icon: '📦', color: 'bg-blue-500' },
-    { name: 'Total Orders', value: stats.totalOrders, icon: '🛒', color: 'bg-green-500' },
-    { name: 'Pending Orders', value: stats.pendingOrders, icon: '⏳', color: 'bg-yellow-500' },
-    { name: 'Completed Orders', value: stats.completedOrders, icon: '✅', color: 'bg-emerald-500' },
     { name: 'Total Sales', value: formatPrice(stats.totalSales), icon: '💰', color: 'bg-pink-500' },
   ];
 
@@ -109,7 +103,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {statCards.map((card) => (
           <div key={card.name} className="bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center gap-4">
