@@ -4,10 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { compressImage } from '@/lib/compressImage';
 
-const DRESS_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-const SHOE_SIZES = ['36', '37', '38', '39', '40', '41', '42'];
-const COLORS = ['Black', 'White', 'Red', 'Blue', 'Pink', 'Green', 'Navy', 'Beige', 'Purple', 'Yellow', 'Orange', 'Gold'];
-
 export default function NewProductPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -22,8 +18,6 @@ export default function NewProductPage() {
     stock: '',
     featured: false,
     isNew: false,
-    availableSizes: [] as string[],
-    availableColors: [] as string[],
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -33,24 +27,6 @@ export default function NewProductPage() {
 
   const handleToggle = (name: 'featured' | 'isNew') => {
     setForm((prev) => ({ ...prev, [name]: !prev[name] }));
-  };
-
-  const handleSizeToggle = (size: string) => {
-    setForm((prev) => ({
-      ...prev,
-      availableSizes: prev.availableSizes.includes(size)
-        ? prev.availableSizes.filter((s) => s !== size)
-        : [...prev.availableSizes, size],
-    }));
-  };
-
-  const handleColorToggle = (color: string) => {
-    setForm((prev) => ({
-      ...prev,
-      availableColors: prev.availableColors.includes(color)
-        ? prev.availableColors.filter((c) => c !== color)
-        : [...prev.availableColors, color],
-    }));
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,8 +82,6 @@ export default function NewProductPage() {
           stock: Number(form.stock),
           featured: form.featured,
           newArrival: form.isNew,
-          sizes: form.availableSizes,
-          colors: form.availableColors,
           images: imagePreviews,
         }),
       });
@@ -124,8 +98,6 @@ export default function NewProductPage() {
       setLoading(false);
     }
   };
-
-  const availableSizesForCategory = form.category === 'Shoes' ? SHOE_SIZES : DRESS_SIZES;
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -268,64 +240,6 @@ export default function NewProductPage() {
               ))}
             </div>
           )}
-        </div>
-
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-black mb-4">Available Sizes</h3>
-          {form.category ? (
-            <div className="flex flex-wrap gap-3">
-              {availableSizesForCategory.map((size) => (
-                <label
-                  key={size}
-                  className={`flex items-center justify-center px-4 py-2 border rounded-lg cursor-pointer transition-colors ${
-                    form.availableSizes.includes(size)
-                      ? 'border-pink-500 bg-pink-50 text-pink-700'
-                      : 'border-gray-300 hover:border-gray-400'
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={form.availableSizes.includes(size)}
-                    onChange={() => handleSizeToggle(size)}
-                    className="sr-only"
-                  />
-                  {size}
-                </label>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500 text-sm">Select a category first to see available sizes</p>
-          )}
-        </div>
-
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-black mb-4">Available Colors</h3>
-          <div className="flex flex-wrap gap-3">
-            {COLORS.map((color) => (
-              <label
-                key={color}
-                className={`flex items-center gap-2 px-4 py-2 border rounded-lg cursor-pointer transition-colors ${
-                  form.availableColors.includes(color)
-                    ? 'border-pink-500 bg-pink-50 text-pink-700'
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={form.availableColors.includes(color)}
-                  onChange={() => handleColorToggle(color)}
-                  className="sr-only"
-                />
-                <div
-                  className={`w-4 h-4 rounded-full border ${
-                    form.availableColors.includes(color) ? 'border-pink-500' : 'border-gray-300'
-                  }`}
-                  style={{ backgroundColor: color.toLowerCase() === 'white' ? '#f9fafb' : color.toLowerCase() }}
-                />
-                {color}
-              </label>
-            ))}
-          </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
