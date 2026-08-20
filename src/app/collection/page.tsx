@@ -4,19 +4,6 @@ import { useState, useEffect, useMemo } from 'react'
 import { use } from 'react'
 import ProductCard, { type Product } from '@/components/ProductCard'
 
-const allSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-const shoeSizes = ['36', '37', '38', '39', '40', '41', '42']
-const colors = [
-  { name: 'Black', hex: '#000000' },
-  { name: 'White', hex: '#FFFFFF' },
-  { name: 'Red', hex: '#EF4444' },
-  { name: 'Blue', hex: '#3B82F6' },
-  { name: 'Pink', hex: '#EC4899' },
-  { name: 'Green', hex: '#22C55E' },
-  { name: 'Navy', hex: '#1E3A5F' },
-  { name: 'Beige', hex: '#D4C5A9' },
-]
-
 export default function CollectionPage({
   searchParams,
 }: {
@@ -29,10 +16,6 @@ export default function CollectionPage({
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState(initialCategory)
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([])
-  const [selectedColors, setSelectedColors] = useState<string[]>([])
-  const [priceMin, setPriceMin] = useState('')
-  const [priceMax, setPriceMax] = useState('')
   const [sort, setSort] = useState('newest')
   const [filtersOpen, setFiltersOpen] = useState(false)
 
@@ -56,28 +39,12 @@ export default function CollectionPage({
     if (category) {
       result = result.filter(p => p.category.toLowerCase().replace(/\s+/g, '-') === category)
     }
-    if (selectedSizes.length > 0) {
-      result = result.filter(p => p.sizes?.some(s => selectedSizes.includes(s)))
-    }
-    if (selectedColors.length > 0) {
-      result = result.filter(p => p.colors?.some(c => selectedColors.includes(c)))
-    }
-    if (priceMin) {
-      result = result.filter(p => Number(p.price) >= Number(priceMin))
-    }
-    if (priceMax) {
-      result = result.filter(p => Number(p.price) <= Number(priceMax))
-    }
-
     if (sort === 'price-low') result.sort((a, b) => Number(a.price) - Number(b.price))
     else if (sort === 'price-high') result.sort((a, b) => Number(b.price) - Number(a.price))
     else result.sort((a, b) => (a.id > b.id ? -1 : 1))
 
     return result
-  }, [products, search, category, selectedSizes, selectedColors, priceMin, priceMax, sort])
-
-  const toggleSize = (s: string) => setSelectedSizes(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])
-  const toggleColor = (c: string) => setSelectedColors(prev => prev.includes(c) ? prev.filter(x => x !== c) : [...prev, c])
+  }, [products, search, category, sort])
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -135,86 +102,6 @@ export default function CollectionPage({
               </div>
             </div>
 
-            {/* Price Range */}
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Price Range (RWF)</h3>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={priceMin}
-                  onChange={(e) => setPriceMin(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={priceMax}
-                  onChange={(e) => setPriceMax(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
-                />
-              </div>
-            </div>
-
-            {/* Sizes */}
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Dress Size</h3>
-              <div className="flex flex-wrap gap-2">
-                {allSizes.map(s => (
-                  <button
-                    key={s}
-                    onClick={() => toggleSize(s)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                      selectedSizes.includes(s)
-                        ? 'bg-rose-600 text-white border-rose-600'
-                        : 'bg-white text-gray-600 border-gray-200 hover:border-rose-300'
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Shoe Size</h3>
-              <div className="flex flex-wrap gap-2">
-                {shoeSizes.map(s => (
-                  <button
-                    key={s}
-                    onClick={() => toggleSize(s)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                      selectedSizes.includes(s)
-                        ? 'bg-rose-600 text-white border-rose-600'
-                        : 'bg-white text-gray-600 border-gray-200 hover:border-rose-300'
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Colors */}
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Color</h3>
-              <div className="flex flex-wrap gap-3">
-                {colors.map(c => (
-                  <button
-                    key={c.name}
-                    onClick={() => toggleColor(c.name)}
-                    title={c.name}
-                    className={`w-8 h-8 rounded-full border-2 transition-all ${
-                      selectedColors.includes(c.name)
-                        ? 'border-rose-600 scale-110'
-                        : 'border-gray-200 hover:border-gray-400'
-                    }`}
-                    style={{ backgroundColor: c.hex }}
-                  />
-                ))}
-              </div>
-            </div>
-
             {/* Sort */}
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">Sort By</h3>
@@ -243,7 +130,7 @@ export default function CollectionPage({
             <div className="text-center py-20">
               <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
               <button
-                onClick={() => { setCategory(''); setSelectedSizes([]); setSelectedColors([]); setPriceMin(''); setPriceMax(''); setSearch('') }}
+                onClick={() => { setCategory(''); setSearch('') }}
                 className="mt-4 text-rose-600 font-medium hover:underline"
               >
                 Clear all filters

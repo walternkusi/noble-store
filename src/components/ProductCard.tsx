@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link
-      href={`/product/${product.id}`}
+      href={`/collection?category=${encodeURIComponent(product.category.toLowerCase().replace(/\s+/g, '-'))}`}
       className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
     >
       <div className="relative aspect-[3/4] bg-gray-50 overflow-hidden">
