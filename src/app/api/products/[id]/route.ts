@@ -49,8 +49,16 @@ export async function PUT(
       const base64Images = images.filter((img: string) => img.startsWith('data:'));
       const urlImages = images.filter((img: string) => !img.startsWith('data:'));
       if (base64Images.length > 0) {
-        const uploaded = await uploadImages(base64Images);
-        processedImages = [...urlImages, ...uploaded];
+        try {
+          const uploaded = await uploadImages(base64Images);
+          processedImages = [...urlImages, ...uploaded];
+        } catch (uploadError) {
+          console.error('Error uploading images:', JSON.stringify(uploadError), uploadError);
+          return NextResponse.json(
+            { error: `Image upload failed: ${uploadError instanceof Error ? uploadError.message : JSON.stringify(uploadError)}` },
+            { status: 500 }
+          );
+        }
       }
     }
 

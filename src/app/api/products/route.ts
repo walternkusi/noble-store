@@ -103,9 +103,9 @@ export async function POST(request: NextRequest) {
       try {
         imageUrls = [...urlImages, ...await uploadImages(base64Images)];
       } catch (uploadError) {
-        console.error('Error uploading images:', uploadError);
+        console.error('Error uploading images:', JSON.stringify(uploadError), uploadError);
         return NextResponse.json(
-          { error: `Image upload failed: ${uploadError instanceof Error ? uploadError.message : 'Unknown error'}` },
+          { error: `Image upload failed: ${uploadError instanceof Error ? uploadError.message : JSON.stringify(uploadError)}` },
           { status: 500 }
         );
       }

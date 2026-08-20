@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { compressImage } from '@/lib/compressImage';
 
 const DRESS_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const SHOE_SIZES = ['36', '37', '38', '39', '40', '41', '42'];
@@ -63,7 +64,8 @@ export default function NewProductPage() {
         reader.onloadend = () => resolve(reader.result as string);
         reader.readAsDataURL(file);
       });
-      base64Images.push(base64);
+      const compressed = await compressImage(base64);
+      base64Images.push(compressed);
     }
     setImagePreviews((prev) => [...prev, ...base64Images]);
   };
