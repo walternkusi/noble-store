@@ -96,8 +96,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, category, price, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
 
-    if (!name || !category || price === undefined) {
-      return NextResponse.json({ error: 'Name, category, and price are required' }, { status: 400 });
+    if (!name || !category) {
+      return NextResponse.json({ error: 'Name and category are required' }, { status: 400 });
     }
 
     let imageUrls: string[] = [];
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
       id: randomUUID(),
       name,
       category,
-      price: parseFloat(price),
+      price: parseFloat(price) || 0,
       buyingPrice: Number(buyingPrice) || 0,
       rentPrice: Number(rentPrice) || 0,
       description: description || '',
