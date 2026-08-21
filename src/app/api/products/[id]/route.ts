@@ -10,7 +10,11 @@ export async function GET(
   try {
     await getDb();
     const { id } = await params;
-    const product = await productsCol().findOne({ id });
+    const isAdmin = Boolean(getAdminFromRequest(request));
+    const product = await productsCol().findOne(
+      { id },
+      isAdmin ? undefined : { projection: { buyingPrice: 0 } }
+    );
 
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -42,7 +46,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { name, category, price, description, images, sizes, colors, stock, featured, newArrival } = body;
+    const { name, category, price, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
 
     let processedImages = images;
     if (images !== undefined && Array.isArray(images)) {
@@ -62,10 +66,12 @@ export async function PUT(
       }
     }
 
-    const update: any = { updatedAt: new Date() };
+    const update: Record<string, unknown> = { updatedAt: new Date() };
     if (name !== undefined) update.name = name;
     if (category !== undefined) update.category = category;
     if (price !== undefined) update.price = parseFloat(price);
+    if (buyingPrice !== undefined) update.buyingPrice = Number(buyingPrice) || 0;
+    if (rentPrice !== undefined) update.rentPrice = Number(rentPrice) || 0;
     if (description !== undefined) update.description = description;
     if (images !== undefined) update.images = processedImages;
     if (sizes !== undefined) update.sizes = sizes;

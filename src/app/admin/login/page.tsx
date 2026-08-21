@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
         localStorage.setItem('admin_token', data.token);
         router.push('/admin');
       } else {
-        setError(data.message || 'Login failed');
+        setError(data.error || 'Login failed');
       }
     } catch {
       setError('An error occurred. Please try again.');

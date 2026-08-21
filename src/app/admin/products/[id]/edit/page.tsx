@@ -22,6 +22,8 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
     name: '',
     category: '',
     price: '',
+    buyingPrice: '',
+    rentPrice: '',
     description: '',
     stock: '',
     featured: false,
@@ -43,6 +45,8 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
             name: data.name,
             category: data.category,
             price: String(data.price),
+            buyingPrice: data.buyingPrice !== undefined ? String(data.buyingPrice) : '',
+            rentPrice: data.rentPrice !== undefined ? String(data.rentPrice) : '',
             description: data.description || '',
             stock: String(data.stock),
             featured: data.featured,
@@ -145,6 +149,8 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
           name: form.name,
           category: form.category,
           price: Number(form.price),
+          buyingPrice: Number(form.buyingPrice) || 0,
+          rentPrice: Number(form.rentPrice) || 0,
           description: form.description,
           stock: Number(form.stock),
           featured: form.featured,
@@ -243,6 +249,38 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                   placeholder="0"
                   min="0"
                   required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Buying Price (RWF)
+                </label>
+                <input
+                  type="number"
+                  name="buyingPrice"
+                  value={form.buyingPrice}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
+                  placeholder="0"
+                  min="0"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Rent Price (RWF)
+                </label>
+                <input
+                  type="number"
+                  name="rentPrice"
+                  value={form.rentPrice}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
+                  placeholder="0"
+                  min="0"
                 />
               </div>
             </div>

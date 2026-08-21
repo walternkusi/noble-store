@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const featured = searchParams.get('featured');
     const newArrival = searchParams.get('newArrival');
 
-    const filter: any = {};
+    const filter: Record<string, unknown> = {};
 
     if (search) {
       filter.$or = [
@@ -33,9 +33,10 @@ export async function GET(request: NextRequest) {
     }
 
     if (minPrice || maxPrice) {
-      filter.price = {};
-      if (minPrice) filter.price.$gte = parseFloat(minPrice);
-      if (maxPrice) filter.price.$lte = parseFloat(maxPrice);
+      const priceFilter: Record<string, number> = {};
+      if (minPrice) priceFilter.$gte = parseFloat(minPrice);
+      if (maxPrice) priceFilter.$lte = parseFloat(maxPrice);
+      filter.price = priceFilter;
     }
 
     if (size) {
@@ -54,7 +55,7 @@ export async function GET(request: NextRequest) {
       filter.newArrival = true;
     }
 
-    let sortOption: any = { createdAt: -1 };
+    let sortOption: Record<string, 1 | -1> = { createdAt: -1 };
     switch (sort) {
       case 'price-asc':
         sortOption = { price: 1 };
@@ -67,7 +68,11 @@ export async function GET(request: NextRequest) {
         break;
     }
 
-    const products = await productsCol().find(filter).sort(sortOption).toArray();
+    const isAdmin = Boolean(getAdminFromRequest(request));
+    const products = await productsCol()
+      .find(filter, isAdmin ? undefined : { projection: { buyingPrice: 0 } })
+      .sort(sortOption)
+      .toArray();
 
     return NextResponse.json(products);
   } catch (error) {
@@ -89,7 +94,7 @@ export async function POST(request: NextRequest) {
     await getDb();
 
     const body = await request.json();
-    const { name, category, price, description, images, sizes, colors, stock, featured, newArrival } = body;
+    const { name, category, price, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
 
     if (!name || !category || price === undefined) {
       return NextResponse.json({ error: 'Name, category, and price are required' }, { status: 400 });
@@ -118,6 +123,8 @@ export async function POST(request: NextRequest) {
       name,
       category,
       price: parseFloat(price),
+      buyingPrice: Number(buyingPrice) || 0,
+      rentPrice: Number(rentPrice) || 0,
       description: description || '',
       images: imageUrls,
       sizes: sizes || [],
