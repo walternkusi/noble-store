@@ -17,9 +17,24 @@ const categories = [
     gradient: 'from-purple-400 to-indigo-500',
   },
   {
+    name: 'Complete Clothes',
+    slug: 'complete-clothes',
+    gradient: 'from-fuchsia-400 to-purple-500',
+  },
+  {
     name: 'Tops',
     slug: 'tops',
     gradient: 'from-emerald-400 to-teal-500',
+  },
+  {
+    name: 'Shorts',
+    slug: 'shorts',
+    gradient: 'from-sky-400 to-blue-500',
+  },
+  {
+    name: 'Skirts',
+    slug: 'skirts',
+    gradient: 'from-red-400 to-rose-500',
   },
   {
     name: 'Shoes',

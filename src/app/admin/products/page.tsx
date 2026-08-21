@@ -29,26 +29,28 @@ export default function AdminProductsPage() {
     product: null,
   });
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem('admin_token');
-      const res = await fetch('/api/products', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setProducts(data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchProducts();
+    let cancelled = false;
+    const token = localStorage.getItem('admin_token');
+    fetch('/api/products', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(res => (res.ok ? res.json() : Promise.reject(new Error('Failed to fetch products'))))
+      .then(data => {
+        if (!cancelled) {
+          setProducts(Array.isArray(data) ? data : []);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        console.error('Failed to fetch products:', error);
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleDelete = async (productId: string) => {
@@ -103,6 +105,10 @@ export default function AdminProductsPage() {
           <option value="">All Categories</option>
           <option value="Short Dresses">Short Dresses</option>
           <option value="Long Dresses">Long Dresses</option>
+          <option value="Complete Clothes">Complete Clothes</option>
+          <option value="Tops">Tops</option>
+          <option value="Shorts">Shorts</option>
+          <option value="Skirts">Skirts</option>
           <option value="Shoes">Shoes</option>
         </select>
       </div>

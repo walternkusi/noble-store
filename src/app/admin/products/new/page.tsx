@@ -144,11 +144,14 @@ export default function NewProductPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
                 required
               >
-                <option value="">Select category</option>
-                <option value="Short Dresses">Short Dresses</option>
-                <option value="Long Dresses">Long Dresses</option>
-                <option value="Tops">Tops</option>
-                <option value="Shoes">Shoes</option>
+                  <option value="">Select category</option>
+                  <option value="Short Dresses">Short Dresses</option>
+                  <option value="Long Dresses">Long Dresses</option>
+                  <option value="Complete Clothes">Complete Clothes</option>
+                  <option value="Tops">Tops</option>
+                  <option value="Shorts">Shorts</option>
+                  <option value="Skirts">Skirts</option>
+                  <option value="Shoes">Shoes</option>
               </select>
             </div>
 

@@ -33,6 +33,10 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/collection?category=short-dresses" className="hover:text-rose-400 transition-colors">Short Dresses</Link></li>
               <li><Link href="/collection?category=long-dresses" className="hover:text-rose-400 transition-colors">Long Dresses</Link></li>
+              <li><Link href="/collection?category=complete-clothes" className="hover:text-rose-400 transition-colors">Complete Clothes</Link></li>
+              <li><Link href="/collection?category=tops" className="hover:text-rose-400 transition-colors">Tops</Link></li>
+              <li><Link href="/collection?category=shorts" className="hover:text-rose-400 transition-colors">Shorts</Link></li>
+              <li><Link href="/collection?category=skirts" className="hover:text-rose-400 transition-colors">Skirts</Link></li>
               <li><Link href="/collection?category=shoes" className="hover:text-rose-400 transition-colors">Shoes</Link></li>
             </ul>
           </div>
