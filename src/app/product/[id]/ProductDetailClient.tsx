@@ -128,7 +128,9 @@ export default function ProductDetailClient({ productId }: { productId: string }
           </p>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
           {product.buyingPrice && (
-            <p className="text-3xl font-bold text-rose-600 mb-6">{formatPrice(product.buyingPrice)} RWF</p>
+            <p className="text-3xl font-bold text-rose-600 mb-6">
+              Buy: {formatPrice(product.buyingPrice)} RWF
+            </p>
           )}
 
           {/* Rent Price */}
@@ -140,7 +142,9 @@ export default function ProductDetailClient({ productId }: { productId: string }
 
           {/* Fallback for products with price field only */}
           {!product.buyingPrice && (product as any).price && (
-            <p className="text-3xl font-bold text-rose-600 mb-6">{formatPrice((product as any).price)} RWF</p>
+            <p className="text-3xl font-bold text-rose-600 mb-6">
+              Buy: {formatPrice((product as any).price)} RWF
+            </p>
           )}
 
           {product.description && (

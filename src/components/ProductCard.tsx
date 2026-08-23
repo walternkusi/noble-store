@@ -59,7 +59,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="mt-2 space-y-1">
             {/* Buying Price (main price) - use as primary, fallback to price for backwards compatibility */}
             <p className="text-lg font-bold text-rose-600">
-              {formatPrice(product.buyingPrice)} RWF
+              Buy: {formatPrice(product.buyingPrice)} RWF
             </p>
             {/* Rent Price */}
             {product.rentPrice !== undefined && Number(product.rentPrice) > 0 && (
@@ -72,7 +72,7 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Fallback for products with price field only (backwards compatibility) */}
         {product.buyingPrice === undefined && !product.rentPrice && (product as any).price && (
           <p className="text-lg font-bold text-rose-600 mt-1">
-            {formatPrice((product as any).price)} RWF
+            Buy: {formatPrice((product as any).price)} RWF
           </p>
         )}
       </div>
