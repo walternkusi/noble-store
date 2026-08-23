@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
 
     const isAdmin = Boolean(getAdminFromRequest(request));
     const products = await productsCol()
-      .find(filter, isAdmin ? undefined : { projection: { buyingPrice: 0 } })
+      .find(filter, isAdmin ? undefined : {})
       .sort(sortOption)
       .toArray();
 

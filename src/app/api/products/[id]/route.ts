@@ -13,7 +13,7 @@ export async function GET(
     const isAdmin = Boolean(getAdminFromRequest(request));
     const product = await productsCol().findOne(
       { id },
-      isAdmin ? undefined : { projection: { buyingPrice: 0 } }
+      isAdmin ? undefined : {}
     );
 
     if (!product) {

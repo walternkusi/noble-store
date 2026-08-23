@@ -55,16 +55,14 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
         {/* Buy/Rent Price */}
-        {(product.buyingPrice || product.rentPrice) && (
+        {product.buyingPrice !== undefined && (
           <div className="mt-2 space-y-1">
             {/* Buying Price (main price) - use as primary, fallback to price for backwards compatibility */}
-            {product.buyingPrice && (
-              <p className="text-lg font-bold text-rose-600">
-                {formatPrice(product.buyingPrice)} RWF
-              </p>
-            )}
+            <p className="text-lg font-bold text-rose-600">
+              {formatPrice(product.buyingPrice)} RWF
+            </p>
             {/* Rent Price */}
-            {product.rentPrice && Number(product.rentPrice) > 0 && (
+            {product.rentPrice !== undefined && Number(product.rentPrice) > 0 && (
               <p className="text-sm text-gray-500">
                 Rent: {formatPrice(product.rentPrice)} RWF
               </p>
@@ -72,7 +70,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         )}
         {/* Fallback for products with price field only (backwards compatibility) */}
-        {!product.buyingPrice && !product.rentPrice && (product as any).price && (
+        {product.buyingPrice === undefined && !product.rentPrice && (product as any).price && (
           <p className="text-lg font-bold text-rose-600 mt-1">
             {formatPrice((product as any).price)} RWF
           </p>
