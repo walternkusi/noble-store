@@ -42,7 +42,7 @@ export default function ProductDetailClient({ productId }: { productId: string }
     const item: Omit<CartItem, 'quantity'> = {
       id: product.id,
       name: product.name,
-      price: Number(product.buyingPrice || (product as any).price),
+      price: Number(product.buyingPrice),
       image: product.images?.[0] || '',
       size: selectedSize,
       color: selectedColor,
@@ -137,13 +137,6 @@ export default function ProductDetailClient({ productId }: { productId: string }
           {product.rentPrice && Number(product.rentPrice) > 0 && (
             <p className="text-lg font-medium text-gray-600 mb-4">
               Rent: {formatPrice(product.rentPrice)} RWF
-            </p>
-          )}
-
-          {/* Fallback for products with price field only */}
-          {!product.buyingPrice && (product as any).price && (
-            <p className="text-3xl font-bold text-rose-600 mb-6">
-              Buy: {formatPrice((product as any).price)} RWF
             </p>
           )}
 
