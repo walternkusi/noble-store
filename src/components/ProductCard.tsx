@@ -53,17 +53,28 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="font-semibold text-gray-900 group-hover:text-rose-600 transition-colors line-clamp-1">
           {product.name}
         </h3>
-        {product.buyingPrice && (
-          <>
-            <p className="text-lg font-bold text-rose-600 mt-1">
-              {formatPrice(product.buyingPrice)} RWF
-            </p>
+        {/* Buy/Rent Price */}
+        {(product.buyingPrice || product.rentPrice) && (
+          <div className="mt-2 space-y-1">
+            {/* Buying Price (main price) */}
+            {product.buyingPrice && (
+              <p className="text-lg font-bold text-rose-600">
+                {formatPrice(product.buyingPrice)} RWF
+              </p>
+            )}
+            {/* Rent Price */}
             {product.rentPrice && Number(product.rentPrice) > 0 && (
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500">
                 Rent: {formatPrice(product.rentPrice)} RWF
               </p>
             )}
-          </>
+          </div>
+        )}
+        {/* Fallback: show price if buyingPrice/rentPrice not set */}
+        {!product.buyingPrice && !product.rentPrice && product.price && (
+          <p className="text-lg font-bold text-rose-600 mt-1">
+            {formatPrice(product.price)} RWF
+          </p>
         )}
       </div>
     </Link>
