@@ -16,6 +16,7 @@ export type Product = {
   isNew?: boolean
   newArrival?: boolean
   details?: Record<string, string>
+  price?: number | string
   buyingPrice?: number | string
   rentPrice?: number | string
 }
@@ -56,7 +57,7 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Buy/Rent Price */}
         {(product.buyingPrice || product.rentPrice) && (
           <div className="mt-2 space-y-1">
-            {/* Buying Price (main price) */}
+            {/* Buying Price (main price) - use as primary, fallback to price for backwards compatibility */}
             {product.buyingPrice && (
               <p className="text-lg font-bold text-rose-600">
                 {formatPrice(product.buyingPrice)} RWF
@@ -69,6 +70,12 @@ export default function ProductCard({ product }: { product: Product }) {
               </p>
             )}
           </div>
+        )}
+        {/* Fallback for products with price field only (backwards compatibility) */}
+        {!product.buyingPrice && !product.rentPrice && (product as any).price && (
+          <p className="text-lg font-bold text-rose-600 mt-1">
+            {formatPrice((product as any).price)} RWF
+          </p>
         )}
       </div>
     </Link>

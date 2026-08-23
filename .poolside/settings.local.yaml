@@ -2,6 +2,7 @@ tools:
     shell:
         allow:
             - cd *
+            - npx tsc *
 paths:
     allow:
         - path: C:/Users/uganzu/girls-fashion-shop/src/app/admin/products/[id]/edit/**
