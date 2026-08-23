@@ -42,7 +42,7 @@ export default function ProductDetailClient({ productId }: { productId: string }
     const item: Omit<CartItem, 'quantity'> = {
       id: product.id,
       name: product.name,
-      price: Number(product.price),
+      price: Number(product.price || product.buyingPrice),
       image: product.images?.[0] || '',
       size: selectedSize,
       color: selectedColor,
@@ -127,22 +127,15 @@ export default function ProductDetailClient({ productId }: { productId: string }
             {product.category.replace(/-/g, ' ')}
           </p>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-          <p className="text-3xl font-bold text-rose-600 mb-6">{formatPrice(product.price)} RWF</p>
+          {product.buyingPrice && (
+            <p className="text-3xl font-bold text-rose-600 mb-6">{formatPrice(product.buyingPrice)} RWF</p>
+          )}
 
-          {/* Buying and Rent Prices (admin info) */}
-          {(product.buyingPrice || product.rentPrice) && (
-            <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-              {product.buyingPrice && Number(product.buyingPrice) > 0 && (
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium">Buying Price:</span> {formatPrice(product.buyingPrice)} RWF
-                </p>
-              )}
-              {product.rentPrice && Number(product.rentPrice) > 0 && (
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium">Rent Price:</span> {formatPrice(product.rentPrice)} RWF
-                </p>
-              )}
-            </div>
+          {/* Rent Price */}
+          {product.rentPrice && Number(product.rentPrice) > 0 && (
+            <p className="text-lg font-medium text-gray-600 mb-4">
+              Rent: {formatPrice(product.rentPrice)} RWF
+            </p>
           )}
 
           {product.description && (

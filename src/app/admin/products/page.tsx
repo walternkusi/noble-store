@@ -160,7 +160,7 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">{product.category}</td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {formatPrice(product.price)}
+                      {product.buyingPrice ? formatPrice(product.buyingPrice) : formatPrice(product.price)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {product.buyingPrice ? formatPrice(product.buyingPrice) : '-'}

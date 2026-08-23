@@ -53,13 +53,17 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="font-semibold text-gray-900 group-hover:text-rose-600 transition-colors line-clamp-1">
           {product.name}
         </h3>
-        <p className="text-lg font-bold text-rose-600 mt-1">
-          {formatPrice(product.price)} RWF
-        </p>
-        {product.rentPrice && Number(product.rentPrice) > 0 && (
-          <p className="text-sm text-gray-500 mt-1">
-            Rent: {formatPrice(product.rentPrice)} RWF
-          </p>
+        {product.buyingPrice && (
+          <>
+            <p className="text-lg font-bold text-rose-600 mt-1">
+              {formatPrice(product.buyingPrice)} RWF
+            </p>
+            {product.rentPrice && Number(product.rentPrice) > 0 && (
+              <p className="text-sm text-gray-500 mt-1">
+                Rent: {formatPrice(product.rentPrice)} RWF
+              </p>
+            )}
+          </>
         )}
       </div>
     </Link>
