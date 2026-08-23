@@ -128,7 +128,6 @@ export default function AdminProductsPage() {
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Product</th>
                   <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Category</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Price</th>
                   <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Buying</th>
                   <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Rent</th>
                   <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Stock</th>
