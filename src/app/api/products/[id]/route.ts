@@ -46,7 +46,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { name, category, price, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
+    const { name, category, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
 
     let processedImages = images;
     if (images !== undefined && Array.isArray(images)) {
@@ -69,7 +69,6 @@ export async function PUT(
     const update: Record<string, unknown> = { updatedAt: new Date() };
     if (name !== undefined) update.name = name;
     if (category !== undefined) update.category = category;
-    if (price !== undefined) update.price = parseFloat(price);
     if (buyingPrice !== undefined) update.buyingPrice = Number(buyingPrice) || 0;
     if (rentPrice !== undefined) update.rentPrice = Number(rentPrice) || 0;
     if (description !== undefined) update.description = description;

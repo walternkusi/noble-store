@@ -7,8 +7,7 @@ interface Product {
   id: string;
   name: string;
   category: string;
-  price: number;
-  buyingPrice?: number;
+  buyingPrice: number;
   rentPrice?: number;
   stock: number;
   images: string[];
@@ -160,10 +159,7 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">{product.category}</td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {product.buyingPrice ? formatPrice(product.buyingPrice) : formatPrice(product.price)}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
-                      {product.buyingPrice ? formatPrice(product.buyingPrice) : '-'}
+                      {formatPrice(product.buyingPrice)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
                       {product.rentPrice ? formatPrice(product.rentPrice) : '-'}
@@ -244,12 +240,9 @@ export default function AdminProductsPage() {
                     </div>
                     <p className="text-sm text-gray-500">{product.category}</p>
                     <div className="flex items-center justify-between mt-2">
-                      <span className="font-medium text-gray-900">{formatPrice(product.price)}</span>
+                      <span className="font-medium text-gray-900">{formatPrice(product.buyingPrice)}</span>
                       <span className="text-sm text-gray-500">Stock: {product.stock}</span>
                     </div>
-                    {product.buyingPrice && (
-                      <p className="text-xs text-gray-500">Buying: {formatPrice(product.buyingPrice)}</p>
-                    )}
                     {product.rentPrice && (
                       <p className="text-xs text-gray-500">Rent: {formatPrice(product.rentPrice)}</p>
                     )}

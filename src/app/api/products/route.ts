@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
       const priceFilter: Record<string, number> = {};
       if (minPrice) priceFilter.$gte = parseFloat(minPrice);
       if (maxPrice) priceFilter.$lte = parseFloat(maxPrice);
-      filter.price = priceFilter;
+      filter.buyingPrice = priceFilter;
     }
 
     if (size) {
@@ -58,10 +58,10 @@ export async function GET(request: NextRequest) {
     let sortOption: Record<string, 1 | -1> = { createdAt: -1 };
     switch (sort) {
       case 'price-asc':
-        sortOption = { price: 1 };
+        sortOption = { buyingPrice: 1 };
         break;
       case 'price-desc':
-        sortOption = { price: -1 };
+        sortOption = { buyingPrice: -1 };
         break;
       case 'popular':
         sortOption = { stock: -1 };
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     await getDb();
 
     const body = await request.json();
-    const { name, category, price, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
+    const { name, category, buyingPrice, rentPrice, description, images, sizes, colors, stock, featured, newArrival } = body;
 
     if (!name || !category) {
       return NextResponse.json({ error: 'Name and category are required' }, { status: 400 });
@@ -122,7 +122,6 @@ export async function POST(request: NextRequest) {
       id: randomUUID(),
       name,
       category,
-      price: parseFloat(price) || 0,
       buyingPrice: Number(buyingPrice) || 0,
       rentPrice: Number(rentPrice) || 0,
       description: description || '',

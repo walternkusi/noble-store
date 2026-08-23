@@ -39,8 +39,8 @@ export default function CollectionPage({
     if (category) {
       result = result.filter(p => p.category.toLowerCase().replace(/\s+/g, '-') === category)
     }
-    if (sort === 'price-low') result.sort((a, b) => Number(a.price) - Number(b.price))
-    else if (sort === 'price-high') result.sort((a, b) => Number(b.price) - Number(a.price))
+    if (sort === 'price-low') result.sort((a, b) => Number(a.buyingPrice) - Number(b.buyingPrice))
+    else if (sort === 'price-high') result.sort((a, b) => Number(b.buyingPrice) - Number(a.buyingPrice))
     else result.sort((a, b) => (a.id > b.id ? -1 : 1))
 
     return result

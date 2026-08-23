@@ -6,7 +6,6 @@ import { useState } from 'react'
 export type Product = {
   id: string
   name: string
-  price: number | string
   images: string[]
   category: string
   description?: string
@@ -14,6 +13,7 @@ export type Product = {
   sizes?: string[]
   stock?: number
   featured?: boolean
+  isNew?: boolean
   newArrival?: boolean
   details?: Record<string, string>
   buyingPrice?: number | string
@@ -69,12 +69,6 @@ export default function ProductCard({ product }: { product: Product }) {
               </p>
             )}
           </div>
-        )}
-        {/* Fallback: show price if buyingPrice/rentPrice not set */}
-        {!product.buyingPrice && !product.rentPrice && product.price && (
-          <p className="text-lg font-bold text-rose-600 mt-1">
-            {formatPrice(product.price)} RWF
-          </p>
         )}
       </div>
     </Link>

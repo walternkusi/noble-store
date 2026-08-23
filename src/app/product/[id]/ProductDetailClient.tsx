@@ -42,7 +42,7 @@ export default function ProductDetailClient({ productId }: { productId: string }
     const item: Omit<CartItem, 'quantity'> = {
       id: product.id,
       name: product.name,
-      price: Number(product.price || product.buyingPrice),
+      price: Number(product.buyingPrice),
       image: product.images?.[0] || '',
       size: selectedSize,
       color: selectedColor,
