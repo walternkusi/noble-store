@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS products (
   name VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
   price DECIMAL(10,2) NOT NULL,
+  buyingPrice DECIMAL(10,2) DEFAULT 0,
+  rentPrice DECIMAL(10,2) DEFAULT 0,
   description TEXT,
   images JSON,
   sizes JSON,

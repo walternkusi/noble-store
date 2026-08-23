@@ -13,6 +13,7 @@ export default function NewProductPage() {
   const [form, setForm] = useState({
     name: '',
     category: '',
+    price: '',
     buyingPrice: '',
     rentPrice: '',
     description: '',
@@ -55,7 +56,7 @@ export default function NewProductPage() {
     e.preventDefault();
     setError('');
 
-    if (!form.name || !form.category || !form.stock) {
+    if (!form.name || !form.category || !form.price || !form.stock) {
       setError('Please fill in all required fields');
       return;
     }
@@ -78,6 +79,7 @@ export default function NewProductPage() {
         body: JSON.stringify({
           name: form.name,
           category: form.category,
+          price: Number(form.price),
           buyingPrice: Number(form.buyingPrice) || 0,
           rentPrice: Number(form.rentPrice) || 0,
           description: form.description,
@@ -153,6 +155,22 @@ export default function NewProductPage() {
                   <option value="Skirts">Skirts</option>
                   <option value="Shoes">Shoes</option>
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Price (RWF) *
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={form.price}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none text-black"
+                placeholder="0"
+                min="0"
+                required
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

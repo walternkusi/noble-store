@@ -1,0 +1,7 @@
+tools:
+    shell:
+        allow:
+            - cd *
+paths:
+    allow:
+        - path: C:/Users/uganzu/girls-fashion-shop/src/app/admin/products/[id]/edit/**

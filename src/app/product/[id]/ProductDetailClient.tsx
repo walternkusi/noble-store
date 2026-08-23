@@ -129,6 +129,22 @@ export default function ProductDetailClient({ productId }: { productId: string }
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
           <p className="text-3xl font-bold text-rose-600 mb-6">{formatPrice(product.price)} RWF</p>
 
+          {/* Buying and Rent Prices (admin info) */}
+          {(product.buyingPrice || product.rentPrice) && (
+            <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+              {product.buyingPrice && Number(product.buyingPrice) > 0 && (
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium">Buying Price:</span> {formatPrice(product.buyingPrice)} RWF
+                </p>
+              )}
+              {product.rentPrice && Number(product.rentPrice) > 0 && (
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium">Rent Price:</span> {formatPrice(product.rentPrice)} RWF
+                </p>
+              )}
+            </div>
+          )}
+
           {product.description && (
             <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
           )}

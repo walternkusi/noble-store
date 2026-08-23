@@ -16,6 +16,8 @@ export type Product = {
   featured?: boolean
   newArrival?: boolean
   details?: Record<string, string>
+  buyingPrice?: number | string
+  rentPrice?: number | string
 }
 
 function formatPrice(price: number | string): string {
@@ -54,6 +56,11 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="text-lg font-bold text-rose-600 mt-1">
           {formatPrice(product.price)} RWF
         </p>
+        {product.rentPrice && Number(product.rentPrice) > 0 && (
+          <p className="text-sm text-gray-500 mt-1">
+            Rent: {formatPrice(product.rentPrice)} RWF
+          </p>
+        )}
       </div>
     </Link>
   )
