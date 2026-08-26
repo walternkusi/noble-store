@@ -37,6 +37,11 @@ const categories = [
     gradient: 'from-red-400 to-rose-500',
   },
   {
+    name: 'Pants',
+    slug: 'pants',
+    gradient: 'from-teal-400 to-cyan-500',
+  },
+  {
     name: 'Shoes',
     slug: 'shoes',
     gradient: 'from-amber-400 to-orange-500',

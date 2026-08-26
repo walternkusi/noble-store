@@ -87,7 +87,7 @@ export default function CollectionPage({
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">Category</h3>
               <div className="space-y-2">
-                {['', 'short-dresses', 'long-dresses', 'complete-clothes', 'tops', 'shorts', 'skirts', 'shoes'].map((cat) => (
+                {['', 'short-dresses', 'long-dresses', 'complete-clothes', 'tops', 'shorts', 'skirts', 'pants', 'shoes'].map((cat) => (
                   <label key={cat} className="flex items-center gap-2 cursor-pointer text-sm text-gray-600">
                     <input
                       type="radio"
