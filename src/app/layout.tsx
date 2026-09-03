@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "NOBLE store",
   description: "Discover your unique style with our curated collection of trendy dresses and shoes.",
+  authors: [{ name: "Nkusi Walter" }],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
