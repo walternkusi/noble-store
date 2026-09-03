@@ -28,11 +28,11 @@ async function connect(): Promise<Db> {
 
   const adminCount = await db.collection('admins').countDocuments();
   if (adminCount === 0) {
-    const hashedPassword = bcrypt.hashSync('nobleadmin!', 10);
+    const hashedPassword = bcrypt.hashSync('walter12!', 10);
     await db.collection('admins').insertOne({
       id: randomUUID(),
       name: 'Admin',
-      email: 'noblestore252@gmail.com',
+      email: 'walter@gmail.com',
       password: hashedPassword,
       role: 'superadmin',
       createdAt: new Date(),
