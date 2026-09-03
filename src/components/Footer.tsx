@@ -71,6 +71,9 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-10 pt-8 text-center text-sm text-gray-500">
           &copy; {new Date().getFullYear()} NOBLE store. All rights reserved.
         </div>
+        <div className="text-center text-xs text-gray-600 mt-4">
+          Developed by <span className="text-gray-500">Nkusi Walter</span>
+        </div>
       </div>
     </footer>
   )
